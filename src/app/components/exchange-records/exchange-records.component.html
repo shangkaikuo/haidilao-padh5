@@ -1,0 +1,17 @@
+<div class="exchange-records-wrapper" infiniteScroll [infiniteScrollDistance]="2" [infiniteScrollThrottle]="50"
+  (scrolled)="onExchangeRecordsListScroll($event)" [scrollWindow]="false">
+  <ngx-loading [show]="loading"></ngx-loading>
+  <div class="flex-wrap row-flex exchange-records" *ngFor="let item of exchangeRecordsList">
+    <div class="col-flex">
+      <div class="row-flex title"><span>{{ item.itemName }}</span></div>
+      <div class="row-flex detail">
+        <span>{{ '订单号：' + item.orderNo }}</span>&nbsp;|&nbsp;
+        <span>{{ '获取日期：' + (item.sendTime | date: 'yyyy-MM-dd') }}</span>&nbsp;|&nbsp;
+        <span>{{ item.score + '积分 x ' + item.sendCount }}</span>
+      </div>
+    </div>
+    <div class="col-flex right-desc">
+      <span>{{ '已保存到我的卡券' }}</span>
+    </div>
+  </div>
+</div>

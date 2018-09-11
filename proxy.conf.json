@@ -1,0 +1,8 @@
+{
+  "/marketing/*": {
+    "target": "http://60.205.180.22",
+    "secure": false,
+    "logLevel": "debug",
+    "changeOrigin": true
+  }
+}

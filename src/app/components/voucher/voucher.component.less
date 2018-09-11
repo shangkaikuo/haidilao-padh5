@@ -1,0 +1,259 @@
+.voucher-container-wrapper {
+    @grayColor: #949494;
+    @lightGrayColor: #e1e1e1;
+    @redColor: #d43d3d;
+    @whiteColor: #fff;
+    display: flex;
+    flex-direction: row;
+    .left-card {
+        width: 30%;
+        height: 90vh;
+        margin: 0.5vw;
+        box-shadow: 0 0 0.25vw 0.25vw #ccc;
+        .usable-points {
+            height: 20%;
+            &>div:first-child {
+                color: @grayColor;
+                width: 100%;
+                font-size: 1.75vw;
+            }
+            &>div:nth-child(2) {
+                padding-top: 0.5vw;
+                color: @redColor;
+                width: 100%;
+                font-size: 2.35vw;
+                &>span:nth-child(2) {
+                    border: solid #B2B2B2;
+                    border-width: 0 0.15vw 0.15vw 0;
+                    display: inline-block;
+                    padding: 0.4vw;
+                    transform: rotate(-45deg);
+                    -webkit-transform: rotate(-45deg);
+                    margin-bottom: 0.1vw;
+                }
+            }
+            &>div:nth-child(3) {
+                font-size: 1.25vw;
+                color: @grayColor;
+            }
+        }
+        .ranking-list {
+            height: 73.4%;
+            font-size: 2.35vw;
+            .ranking-item {
+                width: 25.4vw;
+                height: 11.6vh;
+                border: 1px solid @grayColor;
+                margin-bottom: 1vh;
+                justify-content: center;
+                align-items: center;
+                .img-url {
+                    margin-left: 1vw;
+                    width: 35%;
+                    img {
+                        width: 5vw;
+                        height: 5vw;
+                    }
+                }
+                .title-box {
+                    margin-right: 1vw;
+                    margin-top: 2vh;
+                    width: 65%;
+                    line-height: 1.85vw;
+                    font-size: 1.85vw;
+                    &>div:first-child {
+                        width: 100%;
+                        overflow: hidden;
+                        text-overflow: ellipsis;
+                        white-space: nowrap;
+                        margin-bottom: 3vh;
+                    }
+                    &>div:nth-child(2) {
+                        color: @redColor;
+                    }
+                    .exchange-btn {
+                        display: inline-block;
+                        font-size: 1vw;
+                        height: 3.4vh;
+                        width: 7.5vw;
+                        color: @whiteColor;
+                        background: @redColor;
+                        border-radius: 0.5vw;
+                        cursor: pointer;
+                        text-align: center;
+                        vertical-align: middle;
+                        margin-left: 9vw;
+                        padding-bottom: 3;
+                        margin-top: -4.5vh;
+                    }
+                }
+            }
+            &>div:first-child {
+                color: @redColor;
+                border-bottom: 1px solid @redColor;
+                padding-bottom: 1vw;
+                width: 100%;
+            }
+            &>div:nth-child(2) {
+                padding-top: 1vw;
+                width: 100%;
+                overflow-y: auto;
+                height: 60vh;
+                display: inline-block;
+            }
+        }
+        .exchange-records {
+            height: 6.6%;
+            border-top: 0.155vw solid #949494;
+            justify-content: center;
+            align-items: center;
+            font-size: 1.35vw;
+            width: 100%;
+            bottom: 0vh;
+            left: 0;
+            position: absolute;
+            &>img {
+                width: 2vw;
+                height: 2vw;
+                margin-right: 1vw;
+            }
+        }
+        .point-circle {
+            width: 10vw;
+            height: 10vw;
+            border-radius: 50%;
+            background: #d3a24e;
+            margin: 0 auto;
+            margin-top: 0.85vw;
+            justify-content: center;
+            align-items: center;
+            &>div {
+                color: #fff;
+                text-align: center;
+                padding-top: 0.6vw;
+            }
+            &>div:first-child {
+                font-size: 1.75vw;
+            }
+            &>div:nth-child(2) {
+                font-size: 2.35vw;
+            }
+        }
+        .expire-point {
+            justify-content: center;
+            align-items: center;
+            margin-top: 1vw;
+            font-size: 1.35vw;
+            &>span:first-child {
+                color: #d3a24e;
+            }
+            &>span:nth-child(2) {
+                color: @grayColor;
+            }
+        }
+        .point-rules {
+            position: absolute;
+            top: 3.5vw;
+            right: 2vw;
+            img {
+                width: 1.75vw;
+                height: 1.75vw;
+            }
+            span {
+                font-size: 1.25vw;
+                color: @grayColor;
+            }
+        }
+    }
+    .center-card {
+        width: 70%;
+        height: 90vh;
+        margin: 0.5vw;
+        box-shadow: 0 0 0.25vw 0.25vw #ccc;
+        &>div:first-child {
+            font-size: 1.75vw;
+            color: @redColor;
+            border-bottom: 0.25vw solid @redColor;
+            padding-bottom: 1vw;
+            justify-content: center;
+            align-items: center;
+        }
+        &>div:nth-child(2) {
+            flex-wrap: wrap;
+            margin-top: 2vw;
+            height: 83vh;
+            overflow-y: auto;
+            .voucher-item {
+                background: url('../../../assets/images/foodStamps.png') no-repeat;
+                background-size: 100%;
+                width: 29.4vw;
+                height: 17.6vh;
+                padding: 0;
+                margin: 0;
+                &>div {
+                    margin-left: 8vw;
+                }
+                .title {
+                    font-size: 2.05vw;
+                    line-height: 2.05vw;
+                    margin-top: 2.05vw;
+                    width: 70%;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                    white-space: nowrap;
+                    margin-bottom: 0.5vw;
+                }
+                .peopleNum,
+                .status {
+                    font-size: 1.35vw;
+                    color: @grayColor;
+                    margin-bottom: 0.25vw;
+                }
+                .menuBox {
+                    margin-top: 1.25vw;
+                    font-size: 2.05vw;
+                    line-height: 2.05vw;
+                    color: @redColor;
+                    .exchange-btn {
+                        display: inline-block;
+                        font-size: 1vw;
+                        height: 3.4vh;
+                        width: 7.5vw;
+                        color: @whiteColor;
+                        background: @redColor;
+                        border-radius: 0.5vw;
+                        cursor: pointer;
+                        text-align: center;
+                        vertical-align: middle;
+                        margin-left: 4vw;
+                    }
+                }
+            }
+        }
+        .point-tabs {
+            .retrieve-points-wrapper {
+                height: 85vh;
+                overflow-y: auto;
+                .retrieve-points {
+                    justify-content: space-between;
+                    align-items: center;
+                    margin-top: 1vw;
+                    padding-bottom: 1vw;
+                    border-bottom: 0.25vw solid @lightGrayColor;
+                    &>div:first-child {}
+                    &>div:nth-child(2) {}
+                }
+            } // Customize mat tabs
+            .mat-tab-label .mat-tab-label-content {
+                min-width: 15vw;
+                font-size: 1.55vw;
+            }
+            .mat-tab-label.mat-tab-label-active {
+                color: @redColor;
+            }
+            .mat-ink-bar {
+                background-color: @redColor;
+            }
+        }
+    }
+}

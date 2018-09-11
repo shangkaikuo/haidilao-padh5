@@ -1,0 +1,100 @@
+<div class="voucher-container-wrapper">
+
+    <ngx-loading [show]="loading"></ngx-loading>
+  
+    <mat-card class="left-card">
+      <ng-container *ngIf="isMainPointsPage">
+        <div class="usable-points">
+          <div>可用积分</div>
+          <div (click)="onPointsDetail()"><span>{{ usablePoints }}&nbsp;</span><span></span></div>
+          <div *ngIf="expirePoints !== 0">{{ expirePoints + '积分即将过期' }}</div>
+        </div>
+        <div class="ranking-list">
+          <div class="flex-wrap row-flex middle-flex"><span>排行榜</span></div>
+          <div class="flex-wrap col-flex middle-flex">
+            <ng-container *ngFor="let item of rankings">
+              <div class="ranking-item flex-wrap row-flex">
+                <div class="row-flex img-url">
+                  <img src="{{ item.activity.attendant.imageURL }}">
+                </div>
+                <div class="row-flex title-box">
+                  <div class="col-flex">{{ item.activity.attendant.item_name }}</div>
+                  <div class="col-flex">
+                    <span>{{ item.activity.itemScore + '积分' }}</span>
+                    <span class="exchange-btn">立即兑换</span>
+                  </div>
+                </div>
+              </div>
+            </ng-container>
+          </div>
+        </div>
+      </ng-container>
+      <ng-container *ngIf="!isMainPointsPage">
+        <div class="flex-wrap col-flex point-circle">
+          <div>积分</div>
+          <div><span>{{ usablePoints }}</span></div>
+        </div>
+        <div class="flex-wrap row-flex expire-point" *ngIf="expirePoints !== 0"><span>{{ expirePoints }}</span><span>即将过期</span></div>
+        <div class="flex-wrap row-flex point-rules">
+          <img src="assets/images/question.png">
+          <span>积分规则</span>
+        </div>
+      </ng-container>
+      <div class="exchange-records flex-wrap row-flex" (click)="onExchangeRecords()">
+        <img src="assets/images/exchange-records.png">
+        <span>兑换记录</span>
+      </div>
+    </mat-card>
+    <mat-card class="center-card">
+      <ng-container *ngIf="isMainPointsPage">
+        <div class="flex-wrap row-flex"><span>菜品券</span></div>
+        <div class="flex-wrap row-flex" infiniteScroll [infiniteScrollDistance]="2" [infiniteScrollThrottle]="50"
+          (scrolled)="onVoucherListScroll($event)" [scrollWindow]="false">
+          <ngx-loading [show]="loading_VoucherList"></ngx-loading>
+          <ng-container *ngFor="let item of vouchers">
+            <div class="voucher-item">
+              <div class="title"><span>{{ item.activity.attendant.item_name }}</span></div>
+              <div class="peopleNum"><span>{{ item.sendCount + '人已兑' }}</span></div>
+              <div class="status"><span>{{ (item.totalCount <= item.sendCount) ? '售罄' : '未售罄' }}</span> </div> <div class="menuBox">
+                    <span>{{ item.activity.itemScore + '积分' }}</span>
+                    <span class="exchange-btn" (click)="onExchangeVocuher(item)">立即兑换</span>
+              </div>
+            </div>
+          </ng-container>
+        </div>
+      </ng-container>
+      <ng-container *ngIf="!isMainPointsPage">
+        <mat-tab-group class="point-tabs">
+          <mat-tab label="获取积分">
+            <div class="retrieve-points-wrapper" infiniteScroll [infiniteScrollDistance]="2" [infiniteScrollThrottle]="50"
+              (scrolled)="onPointsListScroll($event)" [scrollWindow]="false">
+              <div class="flex-wrap row-flex retrieve-points" *ngFor="let item of pointsList">
+                <div class="col-flex">
+                  <div class="row-flex"><span>{{ pointsSource[item.source] }}</span></div>
+                  <div class="row-flex"><span>{{ '获取日期：' + (item.gmtCreate | date: 'yyyy-MM-dd HH:mm') }}</span></div>
+                </div>
+                <div class="col-flex">
+                  <span>{{ '+' + item.score }}</span>
+                </div>
+              </div>
+            </div>
+          </mat-tab>
+          <mat-tab label="消耗积分">
+              <div class="consume-points-wrapper" infiniteScroll [infiniteScrollDistance]="2" [infiniteScrollThrottle]="50"
+              (scrolled)="onConsumePointsListScroll($event)" [scrollWindow]="false">
+              <div class="flex-wrap row-flex retrieve-points" *ngFor="let item of consumePointsList">
+                <div class="col-flex">
+                  <div class="row-flex"><span>{{ pointsSource[item.source] }}</span></div>
+                  <div class="row-flex"><span>{{ '消耗日期：' + (item.gmtCreate | date: 'yyyy-MM-dd HH:mm') }}</span></div>
+                </div>
+                <div class="col-flex">
+                  <span>{{ '-' + item.score }}</span>
+                </div>
+              </div>
+            </div>
+          </mat-tab>
+          <mat-tab label="即将过期积分">敬请期待</mat-tab>
+        </mat-tab-group>
+      </ng-container>
+    </mat-card>
+  </div>

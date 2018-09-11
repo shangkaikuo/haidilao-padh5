@@ -1,0 +1,34 @@
+.exchange-records-wrapper {
+    @grayColor: #858585;
+    @lightGrayColor: #afafaf;
+    @lightGrayBorderColor: #e1e1e1;
+    @redColor: #d43d3d;
+    @whiteColor: #fff;
+    @lightBlueColor: #99cfff;
+    height: 85vh;
+    overflow-y: auto;
+    .exchange-records {
+        justify-content: space-between;
+        align-items: center;
+        margin: 1vw 2vw;
+        padding-bottom: 1vw;
+        border-bottom: 0.25vw solid @lightGrayBorderColor;
+        .title {
+            font-size: 1.85vw;
+            line-height: 1.85vw;
+            margin-top: 1vw;
+            margin-bottom: 1.5vw;
+            color: @grayColor;
+        }
+        .detail {
+            font-size: 1.45vw;
+            line-height: 1.45vw;
+            color: @lightGrayColor;
+        }
+        .right-desc {
+            font-size: 1.45vw;
+            line-height: 1.45vw;
+            color: #99cfff;
+        }
+    }
+}
