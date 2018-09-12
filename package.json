@@ -4,6 +4,9 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
+    "build_test_hdl": "ng build --base-href=/mallWeb/",
+    "build_prod_hdl": "ng build --prod --base-href=/mallWeb/",
+    "build_test": "ng build --base-href=/static/test/",
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",

@@ -14,7 +14,7 @@ export class AppService {
   constructor(private http: HttpClient) { }
 
   // 菜品券列表
-  getVoucherList(storeId: string, page: number = 1, size: number = 50): Observable<any> {
+  getVoucherList(uid: string, storeId: string, page: number = 1, size: number = 50): Observable<any> {
     // // TODO: need to be removed once get real data
     // let mockVouchers = [{ itemName: '捞派滑牛肉（半份）', exchangeUserCount: '0', exchangeStatus: '未售罄', consumeLaoCoinNum: '500' },
     // { itemName: '冬瓜（半份）', exchangeUserCount: '0', exchangeStatus: '未售罄', consumeLaoCoinNum: '500' },
@@ -30,16 +30,17 @@ export class AppService {
 
     // return of(mockVouchers).pipe(delay(3000));
     const params = new HttpParams()
-      .set('storeId', storeId)
+      .set('uid', `${uid}`)
+      .set('storeId', `${storeId}`)
       .set('page', `${page}`)
       .set('size', `${size}`);
 
     return this.http
-      .get<any>(base_url + "/marketing/prize/list.json", { params });
+      .get<any>(base_url + "/marketing/api/prize/list.json", { params });
   }
 
   // 排行榜列表
-  getRankingList(storeId: string, size: number = 10): Observable<any> {
+  getRankingList(uid: string, storeId: string, size: number = 10): Observable<any> {
     // // TODO: need to be removed once get real data
     // let mockRankings = [{ itemName: '海底捞经典大麦啤酒2份', consumeLaoCoinNum: '500', itemURL: 'assets/images/test-ranking-img.png' },
     // { itemName: '黄金针菇（半份）', consumeLaoCoinNum: '300', itemURL: 'assets/images/test-ranking-img.png' },
@@ -52,11 +53,12 @@ export class AppService {
 
     // return of(mockRankings);
     const params = new HttpParams()
-      .set('storeId', storeId)
+      .set('uid', `${uid}`)
+      .set('storeId', `${storeId}`)
       .set('size', `${size}`);
 
     return this.http
-      .get<any>(base_url + "/marketing/prize/top.json", { params });
+      .get<any>(base_url + "/marketing/api/prize/top.json", { params });
   }
 
   // 获取可用积分
@@ -84,7 +86,7 @@ export class AppService {
   //     .set('size', size + '');
 
   //   return this.http
-  //     .get<number>("/marketing/activityReserve/getActivityReserve.json", { params });
+  //     .get<number>("/marketing/api/activityReserve/getActivityReserve.json", { params });
   // }
 
   // 获取积分列表
@@ -128,20 +130,21 @@ export class AppService {
       .set('size', `${size}`);
 
     return this.http
-      .get<any>(base_url + "/marketing/score/record.json", { params });
+      .get<any>(base_url + "/marketing/api/score/record.json", { params });
   }
 
-  exchangeVoucher(activityId: string, storeId: string, uid: string): Observable<any> {
+  exchangeVoucher(activityId: string, storeId: string, uid: string, key: string): Observable<any> {
     let outTradeNo = Guid.newGuid();
     const data = {
       activityId: activityId,
       storeId: storeId,
       uid: uid,
+      key: key,
       outTradeNo: outTradeNo
     }
 
     return this.http
-      .post<any>(base_url + "/marketing/prize/exchange.json", JSON.stringify(data));
+      .post<any>(base_url + "/marketing/api/prize/exchange.json", JSON.stringify(data));
   }
 }
 

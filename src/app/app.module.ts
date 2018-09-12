@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
 import { ActivatedRoute, Routes, RouterModule } from '@angular/router';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { MatCardModule, MatDialogModule, MatTabsModule, MAT_DIALOG_DEFAULT_OPTIONS } from '@angular/material';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { LoadingModule } from 'ngx-loading';
@@ -26,7 +26,7 @@ import { VoucherComponent } from './components/voucher/voucher.component';
   imports: [
     BrowserModule,
     // RouterModule.forRoot([]),
-    BrowserAnimationsModule,
+    NoopAnimationsModule,
     MatCardModule,
     InfiniteScrollModule,
     LoadingModule,

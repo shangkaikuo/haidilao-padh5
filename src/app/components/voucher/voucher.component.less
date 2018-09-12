@@ -97,7 +97,8 @@
             &>div:nth-child(2) {
                 padding-top: 1vw;
                 width: 100%;
-                overflow-y: auto;
+                overflow-y: scroll;
+                -webkit-overflow-scrolling: touch;
                 height: 60vh;
                 display: inline-block;
             }
@@ -182,7 +183,8 @@
             flex-wrap: wrap;
             margin-top: 2vw;
             height: 83vh;
-            overflow-y: auto;
+            overflow-y: scroll;
+            -webkit-overflow-scrolling: touch;
             .voucher-item {
                 background: url('../../../assets/images/foodStamps.png') no-repeat;
                 background-size: 100%;
@@ -190,6 +192,7 @@
                 height: 17.6vh;
                 padding: 0;
                 margin: 0;
+                margin-bottom: 1.5vw;
                 &>div {
                     margin-left: 8vw;
                 }
@@ -233,7 +236,8 @@
         .point-tabs {
             .retrieve-points-wrapper {
                 height: 85vh;
-                overflow-y: auto;
+                overflow-y: scroll;
+                -webkit-overflow-scrolling: touch;
                 .retrieve-points {
                     justify-content: space-between;
                     align-items: center;

@@ -5,8 +5,7 @@ import { ExchangeRecordsComponent } from './components/exchange-records/exchange
 import { VoucherComponent } from './components/voucher/voucher.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: 'voucher', pathMatch: 'full' },
-  { path: 'voucher', component: VoucherComponent },
+  { path: ':folder', component: VoucherComponent ,pathMatch: 'full'},
   { path: 'exchange-records/:userId', component: ExchangeRecordsComponent }
 ];
 

@@ -73,9 +73,6 @@ export class VoucherComponent {
   constructor(private activatedRoute: ActivatedRoute, private appService: AppService, public dialog: MatDialog,
     private toastr: ToastrService, private router: Router) {
 
-    // TODO:
-    // this.userId = '200214';
-    // this.storeId = '040503';
   }
 
   ngOnInit() {
@@ -87,6 +84,12 @@ export class VoucherComponent {
       if (params['userId']) {
         this.userId = params['userId'];
       }
+
+      // TODO:
+      // this.userId = '200214';
+      // this.storeId = '040503';
+      console.log('this.userId = ' + this.userId);
+      console.log('this.storeId = ' + this.storeId);
 
       if (this.storeId && this.userId) {
         let data = { storeId: this.storeId, userId: this.userId };
@@ -108,8 +111,8 @@ export class VoucherComponent {
     this.loading = true;
     forkJoin(this.appService.getUsablePoints(this.userId).pipe(catchError(error => of(error))),
       this.appService.getExpirePoints(this.userId).pipe(catchError(error => of(error))),
-      this.appService.getVoucherList(this.storeId, 1, 50).pipe(catchError(error => of(error))),
-      this.appService.getRankingList(this.storeId, 50).pipe(catchError(error => of(error))))
+      this.appService.getVoucherList(this.userId, this.storeId, 1, 50).pipe(catchError(error => of(error))),
+      this.appService.getRankingList(this.userId, this.storeId, 10).pipe(catchError(error => of(error))))
       .subscribe(([usablePointsRes, expirePointsRes, voucherListRes, rankingListRes]) => {
         if (usablePointsRes.status === 0) {
           this.usablePoints = usablePointsRes.data;
@@ -183,14 +186,13 @@ export class VoucherComponent {
   }
 
   onExchangeRecords() {
-    // this.router.navigate(['exchange-records'], { queryParams: { userId: this.userId } });
-    this.router.navigate(['/exchange-records/200214']);
+    this.router.navigate(['/exchange-records/' + this.userId]);
   }
 
   onVoucherListScroll($event) {
     this.loading_VoucherList = true;
     this.currentPage_VoucherList++;
-    this.appService.getVoucherList(this.storeId, this.currentPage_VoucherList).subscribe(res => {
+    this.appService.getVoucherList(this.userId, this.storeId, this.currentPage_VoucherList).subscribe(res => {
       if (res.status === 0) {
         if (res.data.length > 0) {
           res.data.forEach(item => {
@@ -248,6 +250,7 @@ export class VoucherComponent {
   }
 
   onExchangeVocuher(item: any) {
+    console.log('DlgExchangeVoucherComponent');
     const dialogRef = this.dialog.open(DlgExchangeVoucherComponent, {
       width: '300px',
       data: item
@@ -256,7 +259,7 @@ export class VoucherComponent {
     dialogRef.afterClosed().subscribe(res => {
       if (res) {
         this.loading = true;
-        this.appService.exchangeVoucher(item.activityId, item.storeId, this.userId).subscribe(r => {
+        this.appService.exchangeVoucher(item.activityId, item.storeId, this.userId, item.activity.attendant.key).subscribe(r => {
           if (r.status === 0) {
             this.exchangeSuccess(item);
 
