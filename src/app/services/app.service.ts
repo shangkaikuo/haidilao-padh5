@@ -1,8 +1,10 @@
 import { Injectable } from '@angular/core';
 import { from, of, Observable } from 'rxjs';
-import { mapTo, delay, merge, map } from 'rxjs/operators';
+import { mapTo, delay, merge, map, shareReplay } from 'rxjs/operators';
 import { concatMap } from 'rxjs/internal/operators';
 import { HttpClient, HttpParams } from '@angular/common/http';
+import { base_url } from '../base-url';
+import { Guid } from '../common/create-guid';
 
 @Injectable({
   providedIn: 'root'
@@ -33,7 +35,7 @@ export class AppService {
       .set('size', `${size}`);
 
     return this.http
-      .get<any>("/marketing/prize/list.json", { params });
+      .get<any>(base_url + "/marketing/prize/list.json", { params });
   }
 
   // 排行榜列表
@@ -54,25 +56,25 @@ export class AppService {
       .set('size', `${size}`);
 
     return this.http
-      .get<any>("/marketing/prize/top.json", { params });
+      .get<any>(base_url + "/marketing/prize/top.json", { params });
   }
 
   // 获取可用积分
-  getUsablePoints(userId: number): Observable<number> {
+  getUsablePoints(userId: string): Observable<number> {
     const params = new HttpParams()
       .set('userId', userId + '');
 
     return this.http
-      .get<number>("/marketing/api/score/total.json", { params });
+      .get<number>(base_url + "/marketing/api/score/total.json", { params });
   }
 
   // 获取即将过期积分
-  getExpirePoints(userId: number) {
+  getExpirePoints(userId: string) {
     const params = new HttpParams()
       .set('userId', userId + '');
 
     return this.http
-      .get<number>("/marketing/api/score/expire.json", { params });
+      .get<number>(base_url + "/marketing/api/score/expire.json", { params });
   }
 
   // getStoreGiftList(storeId: string, page: number = 1, size: number = 10) {
@@ -87,14 +89,14 @@ export class AppService {
 
   // 获取积分列表
   // 来源 1就餐消费获得积分 2积分兑换 3积分转让 4积分奖励 5积分扣减 6积分抵现 7积分充值
-  retrievePointsList(userId: number, page: number = 1, size: number = 50): Observable<any> {
+  retrievePointsList(userId: string, page: number = 1, size: number = 50): Observable<any> {
     const params = new HttpParams()
       .set('userId', `${userId}`)
       .set('page', `${page}`)
       .set('size', `${size}`);
 
     return this.http
-      .get<any>("/marketing/api/score/profile/obtain.json", { params });
+      .get<any>(base_url + "/marketing/api/score/profile/obtain.json", { params });
     // let data = [{ type: '就餐消费1', date: '2018-08-01 10:50', count: 170 },
     // { type: '就餐消费2', date: '2018-06-01 10:50', count: 100 },
     // { type: '就餐消费3', date: '2018-12-01 10:50', count: 68 },
@@ -108,26 +110,39 @@ export class AppService {
   }
 
   // 获取消耗积分列表
-  retrieveConsumePointsList(userId: number, page: number = 1, size: number = 50): Observable<any> {
+  retrieveConsumePointsList(userId: string, page: number = 1, size: number = 50): Observable<any> {
     const params = new HttpParams()
       .set('userId', `${userId}`)
       .set('page', `${page}`)
       .set('size', `${size}`);
 
     return this.http
-      .get<any>("/marketing/api/score/profile/consume.json", { params });
+      .get<any>(base_url + "/marketing/api/score/profile/consume.json", { params });
   }
 
-    // 获取兑换记录列表
-    getExchangeRecordsList(userId: number, page: number = 1, size: number = 50): Observable<any> {
-      const params = new HttpParams()
-        .set('uid', `${userId}`)
-        .set('page', `${page}`)
-        .set('size', `${size}`);
-  
-      return this.http
-        .get<any>("/marketing/score/record.json", { params });
+  // 获取兑换记录列表
+  getExchangeRecordsList(userId: string, page: number = 1, size: number = 50): Observable<any> {
+    const params = new HttpParams()
+      .set('uid', `${userId}`)
+      .set('page', `${page}`)
+      .set('size', `${size}`);
+
+    return this.http
+      .get<any>(base_url + "/marketing/score/record.json", { params });
+  }
+
+  exchangeVoucher(activityId: string, storeId: string, uid: string): Observable<any> {
+    let outTradeNo = Guid.newGuid();
+    const data = {
+      activityId: activityId,
+      storeId: storeId,
+      uid: uid,
+      outTradeNo: outTradeNo
     }
+
+    return this.http
+      .post<any>(base_url + "/marketing/prize/exchange.json", JSON.stringify(data));
+  }
 }
 
 export interface Voucher {

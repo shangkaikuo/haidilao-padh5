@@ -13,34 +13,33 @@ export class ExchangeRecordsComponent implements OnInit {
   loading = false;
   currentPage = 1;
   exchangeRecordsList: any;
-  userId = 0
+  userId: string = '0';
 
-  constructor(private appService: AppService, private toastr: ToastrService, private activatedRoute: ActivatedRoute) { }
+  constructor(private appService: AppService,
+    private toastr: ToastrService,
+    private activatedRoute: ActivatedRoute) { }
 
   ngOnInit() {
-    this.activatedRoute.queryParams.subscribe(params => {
-      if (params && params.userId) {
-        this.userId = params.userId;
-
-        this.loading = true;
-        this.appService.getExchangeRecordsList(params.userId, this.currentPage).subscribe(res => {
-          if (res.status === 0) {
-            if (res.data.length > 0) {
-              this.exchangeRecordsList = res.data;
-            }
-          } else {
-            this.toastr.error('获取积分兑换记录失败', '', { positionClass: 'toast-bottom-center' });
+    this.userId = this.activatedRoute.snapshot.paramMap.get('userId');
+    if (this.userId) {
+      this.loading = true;
+      this.appService.getExchangeRecordsList(this.userId, this.currentPage).subscribe(res => {
+        if (res.status === 0) {
+          if (res.data.length > 0) {
+            this.exchangeRecordsList = res.data;
           }
+        } else {
+          this.toastr.error('获取积分兑换记录失败', '', { positionClass: 'toast-bottom-center' });
+        }
 
-          this.loading = false;
-        }, err => {
-          this.loading = false;
-        });
-      }
-    });
+        this.loading = false;
+      }, err => {
+        this.loading = false;
+      });
+    }
   }
 
-  onExchangeRecordsListScroll() {
+  onExchangeRecordsListScroll($event) {
     this.loading = true;
     this.currentPage++;
     this.appService.getExchangeRecordsList(this.userId, this.currentPage).subscribe(res => {

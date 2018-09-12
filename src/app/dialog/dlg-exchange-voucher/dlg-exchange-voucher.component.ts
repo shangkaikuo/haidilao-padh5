@@ -10,7 +10,7 @@ import { Voucher } from '../../services/app.service';
 export class DlgExchangeVoucherComponent implements OnInit {
 
   constructor(public dialogRef: MatDialogRef<DlgExchangeVoucherComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: Voucher) { }
+    @Inject(MAT_DIALOG_DATA) public data: any) { }
 
   ngOnInit() {
   }

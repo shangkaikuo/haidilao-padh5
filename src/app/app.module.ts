@@ -39,7 +39,8 @@ import { VoucherComponent } from './components/voucher/voucher.component';
   providers: [],
   entryComponents: [
     AppComponent,
-    DlgExchangeVoucherComponent
+    DlgExchangeVoucherComponent,
+    DlgExchangeSuccessComponent
   ],
   bootstrap: [AppComponent]
 })

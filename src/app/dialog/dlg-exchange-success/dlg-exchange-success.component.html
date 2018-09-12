@@ -1,10 +1,9 @@
 <div class="dlg-exchange-success-wrapper flex-wrap col-flex">
-  <div class="title"><span>兑换优惠券</span></div>
-  <div class="img-voucher"><img src="../../../assets/images/food-stamps.png"></div>
-  <div class="detail"><span>{{ data.itemName }}</span></div>
-  <div class="detail"><span>{{ '所需积分：' + data.consumeLaoCoinNum }}</span></div>
-  <div class="exchange-btn">
-    <button [mat-dialog-close]="data" cdkFocusInitial>确认兑换</button>
+  <div class="img-voucher"><img src="../../../assets/images/success.png"></div>
+  <div class="detail"><span>兑换成功</span></div>
+  <div class="detail"><span>{{ '是否使用' + data.activity.attendant.item_name + '菜品券？' }}</span></div>
+  <div class="exchange-success-btn flex-wrap row-flex">
+    <button class="immediately-use-btn" [mat-dialog-close]="data" cdkFocusInitial>立即使用</button>
+    <button class="use-next-btn" (click)="onCancel()" cdkFocusInitial>下次使用</button>
   </div>
-  <div><img class="cancel-btn" (click)="onCancel()" src="../../../assets/images/close-btn.png"></div>
 </div>

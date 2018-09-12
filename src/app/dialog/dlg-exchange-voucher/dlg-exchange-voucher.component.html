@@ -1,8 +1,8 @@
 <div class="dlg-exchange-voucher-wrapper flex-wrap col-flex">
   <div class="title"><span>兑换优惠券</span></div>
   <div class="img-voucher"><img src="../../../assets/images/food-stamps.png"></div>
-  <div class="detail"><span>{{ data.itemName }}</span></div>
-  <div class="detail"><span>{{ '所需积分：' + data.consumeLaoCoinNum }}</span></div>
+  <div class="detail"><span>{{ data.activity.attendant.item_name }}</span></div>
+  <div class="detail"><span>{{ '所需积分：' + data.activity.itemScore }}</span></div>
   <div class="exchange-btn">
     <button [mat-dialog-close]="data" cdkFocusInitial>确认兑换</button>
   </div>

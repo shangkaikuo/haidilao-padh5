@@ -7,8 +7,7 @@ import { VoucherComponent } from './components/voucher/voucher.component';
 const routes: Routes = [
   { path: '', redirectTo: 'voucher', pathMatch: 'full' },
   { path: 'voucher', component: VoucherComponent },
-  { path: 'exchange-records', component: ExchangeRecordsComponent }
-  // { path: '/', component: AppComponent }
+  { path: 'exchange-records/:userId', component: ExchangeRecordsComponent }
 ];
 
 @NgModule({

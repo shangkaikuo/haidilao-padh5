@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+import { Voucher } from '../../services/app.service';
 
 @Component({
   selector: 'app-dlg-exchange-success',
@@ -7,9 +9,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DlgExchangeSuccessComponent implements OnInit {
 
-  constructor() { }
+  constructor(public dialogRef: MatDialogRef<DlgExchangeSuccessComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: Voucher) { }
 
   ngOnInit() {
   }
 
+  onCancel() {
+    this.dialogRef.close();
+  }
 }

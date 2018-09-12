@@ -15,8 +15,7 @@ export class AppComponent {
 
   ngOnInit() {
     this.activatedRoute.queryParams.subscribe(params => {
-      let x = params['a'];
-      // alert('a = ' + x);
+      
     });
 
   }
